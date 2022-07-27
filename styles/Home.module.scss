@@ -1,0 +1,38 @@
+.container{
+  text-align: center;
+}
+
+.card {
+  margin: 10%;
+  width: 400px;
+  height: 100%;  
+  border-radius: 0.4em;
+  box-shadow: 15px 15px 30px #bebebe,
+             -15px -15px 30px #ffffff;
+  transition: box-shadow .3s ease-in-out;
+  border: rgb(186, 202, 245) 0.2em solid;
+  text-align: center;
+  }
+
+.card:hover {
+  border: #7d3ff0 0.2em solid;
+}
+.search{
+  border: none;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: #e8e8e8;
+  box-shadow: 20px 20px 60px #c5c5c5,
+      -20px -20px 60px #ffffff;
+  transition: 0.3s;
+  }
+.search:focus {
+  outline-color: #e8e8e8;
+  background: #e8e8e8;
+  box-shadow: inset 20px 20px 60px #c5c5c5,
+     inset -20px -20px 60px #ffffff;
+  transition: 0.3s;
+ }
+
+
+
