@@ -1,5 +1,5 @@
 import Image from "next/image"
-import weather from '../../assets/weather.png'
+import weather from '../../../assets/weather.png'
 import styles from './Navbar.module.scss'
 import React from 'react'
 
