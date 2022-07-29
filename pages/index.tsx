@@ -2,13 +2,18 @@ import type { GetStaticProps, NextPage } from "next";
 import Footer from "../components/views/Footer/Footer";
 import Navbar from "../components/views/Navbar/Navbar";
 import styles from "../styles/Home.module.scss";
+import weatherApi from '../api/weatherApi';
+import { CityWeather, Current } from "../interfaces/city-props";
+import Image from "next/image";
 
 interface Props{
-    
+    city: Location[]
+    weather: Current[]
 }
 
-const HomePage: NextPage = (props) => {
-  console.log(props);
+const HomePage: NextPage<Props> = ({ weather, city}) => {
+  console.log(weather);
+  
 
   return (
     <>
@@ -27,12 +32,18 @@ const HomePage: NextPage = (props) => {
         </button>
       </form>
       <div className={styles.card}>
-        <h1>Caracas</h1>
-        <p>25°</p>        
-        <p>icono</p>
+        <h1>Bogota</h1>
+        <p>temperatura: {city.cloud}°</p>        
+        {/* <Image
+          src={city.condition.icon}
+          alt='ciudad'
+          width={150}
+          height={150}
+          
+        /> */}
         <p>soleado</p>
         <div>
-          <p>humedad</p>
+          <p>humedad{city.humidity}</p>
           <p>velocidad del viento</p>
           <p>sensacion termica</p>
         </div>
@@ -45,11 +56,12 @@ const HomePage: NextPage = (props) => {
 
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
-  console.log('Hola')
+  const {data} = await weatherApi.get<CityWeather>('/current.json?key=bfceb7d7ca9a42a5adb202909222707&q=Bogota')
+  console.log(data)
 
   return {
     props: {
-      name: 'bethsy'
+      city: data.current
     }
   }
 }
