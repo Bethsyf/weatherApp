@@ -7,12 +7,12 @@ import { CityWeather, Current } from "../interfaces/city-props";
 import Image from "next/image";
 
 interface Props{
-    city: Location[]
-    weather: Current[]
+    city: Current[]
+    // weather: Current[]
 }
 
-const HomePage: NextPage<Props> = ({ weather, city}) => {
-  console.log(weather);
+const HomePage: NextPage<Props> = ({  city}) => {
+  
   
 
   return (
@@ -33,19 +33,19 @@ const HomePage: NextPage<Props> = ({ weather, city}) => {
       </form>
       <div className={styles.card}>
         <h1>Bogota</h1>
-        <p>temperatura: {city.cloud}°</p>        
-        {/* <Image
-          src={city.condition.icon}
+        <p>temperatura: {city.temp_c}°C</p>        
+        <Image
+          src='http://cdn.weatherapi.com/weather/64x64/day/116.png'
           alt='ciudad'
           width={150}
           height={150}
           
-        /> */}
+        />
         <p>soleado</p>
         <div>
-          <p>humedad{city.humidity}</p>
-          <p>velocidad del viento</p>
-          <p>sensacion termica</p>
+          <p>humedad {city.humidity}</p>
+          <p>velocidad del viento {city.wind_kph} kph</p>
+          <p>sensacion termica {city.feelslike_c}°C </p>
         </div>
       </div>
       <Footer />
