@@ -5,6 +5,8 @@ import styles from "../styles/Home.module.scss";
 import weatherApi from '../api/weatherApi';
 import { CityWeather, Current } from "../interfaces/city-props";
 import Image from "next/image";
+import Head from "next/head";
+import Search from "../components/controls/search/Search";
 
 interface Props{
     city: Current[]
@@ -17,30 +19,21 @@ const HomePage: NextPage<Props> = ({  city}) => {
 
   return (
     <>
+    <Head>
+        <title>Weather App - Next</title>
+      </Head>
       <Navbar />
-      <form className={styles.city} >
-        <div>
-          <input
-            className={styles.search}
-            type="text"
-            name="city"
-            placeholder="Nombre de la Ciudad"           
-          />
-        </div>
-        <button type="submit" className={styles.btn}>
-          Ver el Clima
-        </button>
-      </form>
+      <Search/>
       <div className={styles.card}>
         <h1>Bogota</h1>
         <p>temperatura: {city.temp_c}°C</p>        
-        <Image
+        {/* <Image
           src='http://cdn.weatherapi.com/weather/64x64/day/116.png'
           alt='ciudad'
           width={150}
           height={150}
           
-        />
+        /> */}
         <p>soleado</p>
         <div>
           <p>humedad {city.humidity}</p>
