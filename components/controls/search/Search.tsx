@@ -1,27 +1,43 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from '../search/Search.module.scss'
 
-const Search = () => {
-    const [query, setQuery] = React.useState("");
 
-    const onChange = (e) => {
-        const { value } = e.target;
-        setQuery(value);
-    }
+const Search = () => {
+  const [text, setText] = useState("");
+
+  
+  const handleSubmit = (e)  => {
+    e.preventDefault();
+    const textTrim = text.trim();
+    
+  };
 
   return (
-    <form className={styles.city}  >
+    <form className={styles.city} onSubmit={handleSubmit} >
         <div key="">
           <input
+          value={text}
             className={styles.search}
             type="text"            
             name="city"
+            onChange={e => setText(e.target.value)}          
             placeholder="Nombre de la Ciudad"           
           />
         </div>
-        <button type="submit" className={styles.btn} onChange={onChange}>
+        <button type="submit" className={styles.btn} >
           Ver el Clima
-        </button>
+        </button>       
+              
+                {/* <li key={city.location.name}>
+                  <Link href={`/location/${city.location.name}`}>
+                    <a>
+                      {city.location.name}
+                      {city.location.region}
+                      <span>({city.location.country})</span>
+                    </a>
+                  </Link>
+                </li> */}                        
+        
       </form>
   )
 }

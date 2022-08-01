@@ -2,7 +2,7 @@
 
 export interface CityWeather {
     location: Location;
-    current:  Current;
+    current?:  Current;
 }
 
 export interface Current {
