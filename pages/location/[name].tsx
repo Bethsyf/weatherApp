@@ -1,5 +1,6 @@
 import { GetStaticPaths, NextPage } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import React from 'react'
 import weatherApi from '../../api/weatherApi';
 import { CityWeather } from '../../interfaces/city-props';
@@ -14,6 +15,8 @@ const CitybyNamePage: NextPage<Props> = ({ city }) => {
       <Head>
         <title>{city.location.name} Weather - Next Weather App</title>
       </Head>
+      <div>hola</div>
+
       </>
   )
 }

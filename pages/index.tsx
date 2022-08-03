@@ -6,8 +6,10 @@ import weatherApi from '../api/weatherApi';
 import { CityWeather, Current } from '../interfaces/city-props';
 import Image from "next/image";
 import Head from "next/head";
-import Search from "../components/controls/search/Search";
+
 import Link from "next/link";
+import axios from "axios";
+import Search from "../components/controls/search/Search";
 
 interface Props{
     city: CityWeather
@@ -17,7 +19,6 @@ interface Props{
 const HomePage: NextPage<Props> = ({  city }) => {
   
   
-
   return (
     <>
     <Head>
@@ -31,17 +32,18 @@ const HomePage: NextPage<Props> = ({  city }) => {
         <p>{city.location.country}</p>
         <p>{city.current?.condition.text}</p>
         {/* <Image
-          src={city.current?.condition[1]}
+          src={`http://cdn.weatherapi.com/weather/64x64/night/116.png`}
           alt={city.current?.condition.text}
           width={100}
           height={100}          
         /> */}
+        
         <p>temperatura: {city.current?.temp_c}°C</p> 
         <p>Sensacion termica: {city.current?.feelslike_c}°C </p>    
         <div>
           <p>Humedad: {city.current?.humidity}</p>
           <p>Velocidad del viento: {city.current?.wind_kph} kph</p>
-          <button><Link href='/date'><a className={ styles.link }>Buscar por fechas</a></Link></button>  
+          <button><Link href='/${city}/date'><a className={ styles.link }>Buscar por fechas</a></Link></button>  
         </div>
       </div>
       <Footer />
@@ -53,13 +55,16 @@ const HomePage: NextPage<Props> = ({  city }) => {
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   
-  const {data} = await weatherApi.get<CityWeather>(`/current.json?key=${process.env.API_KEY}&q=Medellin`)
+  // const {data} = await weatherApi.get<CityWeather>()
+  // console.log(data)
+
+  const data = await axios.get('http://api.weatherapi.com/v1/current.json?key=bfceb7d7ca9a42a5adb202909222707&q=cali')
   console.log(data)
   
 
   return {
     props: {
-      city: data
+      city: data.data
     }
   }
 }

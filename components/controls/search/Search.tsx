@@ -1,45 +1,48 @@
-import React, { useState } from 'react'
-import styles from '../search/Search.module.scss'
+import React, { useState } from "react";
+import styles from "../search/Search.module.scss";
+import axios from "axios";
+import { CityWeather } from "../../../interfaces/city-props";
 
 
 const Search = () => {
-  const [text, setText] = useState("");
+  const [nameCity, setNameCity] = useState("");
 
-  
-  const handleSubmit = (e)  => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const textTrim = text.trim();
-    
+    getData(
+      `http://api.weatherapi.com/v1/current.json?key=bfceb7d7ca9a42a5adb202909222707&q=${nameCity}`
+    );
+  };
+
+  const getData = async (url: string) => {
+    let listarApi = await axios.get(url);
+    let { data } = listarApi;
+    console.log(data);
+    return data;
   };
 
   return (
-    <form className={styles.city} onSubmit={handleSubmit} >
-        <div key="">
+    <div key="">
+      <form className={styles.city} onSubmit={handleSubmit}>
+        <div>
           <input
-          value={text}
+            
             className={styles.search}
-            type="text"            
+            type="text"
             name="city"
-            onChange={e => setText(e.target.value)}          
-            placeholder="Nombre de la Ciudad"           
+            onChange={(e) => setNameCity(e.target.value)}
+            placeholder="Nombre de la Ciudad"
           />
         </div>
-        <button type="submit" className={styles.btn} >
+        <button type="submit" className={styles.btn}>
           Ver el Clima
-        </button>       
-              
-                {/* <li key={city.location.name}>
-                  <Link href={`/location/${city.location.name}`}>
-                    <a>
-                      {city.location.name}
-                      {city.location.region}
-                      <span>({city.location.country})</span>
-                    </a>
-                  </Link>
-                </li> */}                        
-        
+        </button>        
+        <div className={styles.card}>
+          <h1>{}</h1>
+        </div>
       </form>
-  )
-}
+    </div>
+  );
+};
 
-export default Search
+export default Search;
